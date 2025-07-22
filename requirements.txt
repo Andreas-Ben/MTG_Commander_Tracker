@@ -3,4 +3,3 @@ numpy
 pandas
 openpyxl
 streamlit_extras
-io
