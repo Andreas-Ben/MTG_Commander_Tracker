@@ -2,5 +2,5 @@ streamlit
 numpy
 pandas
 openpyxl
-streamlit-extras
+streamlit_extras.bottom_container
 io
