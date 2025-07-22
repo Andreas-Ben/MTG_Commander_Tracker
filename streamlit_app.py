@@ -18,13 +18,13 @@ if st.checkbox('Show example data'):
     })
     st.write(example_data)
 
-uploaded_file = st.file_uploader("Upload an Excel file", type=["xlsx", "xls"])
+uploaded_file = st.file_uploader("Upload an CSV file", type=["csv"])
 
 
 
 @st.cache_data(persist=True)
 def load_data(file):
-    data = pd.read_excel(file, usecols="A:G")
+    data = pd.read_csv(file, usecols="A:D")
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
   #  data['date'] = pd.to_datetime(data['date'], errors='coerce')
@@ -103,15 +103,16 @@ with bottom():
     col1, col2 = st.columns(2)
     with col2:
         if not data.empty:
-            output = BytesIO()
-            with pd.ExcelWriter(output, engine='openpyxl') as writer:
-                data.to_excel(writer, index=False)
+            #output = BytesIO()
+            csv = data.to_csv(index=False)
             st.download_button(
-                label="Download Data as Excel",
-                data=output.getvalue(),
-                file_name='mtg_data.xlsx',
-                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                label="Download Data as CSV file",
+                data = csv,
+                file_name= 'mtg_data.csv' ,
+                mime='text/csv',
                 use_container_width=True
             )
     with col1:
         st.write("Made with ❤️ by Benee")
+
+
