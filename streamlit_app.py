@@ -2,19 +2,19 @@ import streamlit as st
 import pandas as pd
 from streamlit_extras.bottom_container import bottom  # Importing the bottom container
 from io import BytesIO
-from streamlit_extras.buy_me_a_coffee import button
+
 st.title('MTG Commander Tracker and Stats')
 
 # Example data
 if st.checkbox('Show example data'):
     example_data = pd.DataFrame({
         'Commander': ['Vivi', 'Ragnar'],
-        'Color Combo': ['Red', 'Naya'],
-        'Did you Start?': [False, True],
+#        'Color Combo': ['Red', 'Naya'],
+ #       'Did you Start?': [False, True],
         'Did you Win?': [True, False],
         'Did you have Fun?': [True, False],
         'How many opponents': [1, 3],
-        'Date': ['2023-10-01', '2023-10-02'],
+#        'Date': ['2023-10-01', '2023-10-02'],
     })
     st.write(example_data)
 
@@ -27,19 +27,20 @@ def load_data(file):
     data = pd.read_excel(file, usecols="A:G")
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
-    data['date'] = pd.to_datetime(data['date'], errors='coerce')
+  #  data['date'] = pd.to_datetime(data['date'], errors='coerce')
     return data
 
 @st.cache_data(persist=True)
 def manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_you_have_fun, how_many_opponents, date):
+
     new_data = pd.DataFrame({
         'commander': [commander],
-        'color combo': [color_combo],
-        'did you start?': [did_you_start],
+#        'color combo': [color_combo],
+#        'did you start?': [did_you_start],
         'did you win?': [did_you_win],
         'did you have fun?': [did_you_have_fun],
         'how many opponents': [how_many_opponents],
-        'date': [pd.to_datetime(date)]
+#        'date': [pd.to_datetime(date)]
     })
     return new_data
 
@@ -59,15 +60,15 @@ if st.checkbox('Show raw data'):
 if st.checkbox('Manual Data Entry'):
     st.write("You can enter data manually here:")
     commander = st.text_input("Commander")
-    color_combo = st.text_input("Color Combo")
-    did_you_start = st.checkbox("Did you Start?")
+#    color_combo = st.text_input("Color Combo")
+#    did_you_start = st.checkbox("Did you Start?")
     did_you_win = st.checkbox("Did you Win?")
     did_you_have_fun = st.checkbox("Did you have Fun?")
     how_many_opponents = st.number_input("How many opponents", min_value=0, max_value=3, value=1)
-    date = st.date_input("Date")
+#    date = st.date_input("Date")
 
     if st.button('Submit'):
-        new_data = manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_you_have_fun, how_many_opponents, date)
+        new_data = manual_data_entry(commander, '''color_combo''', '''did_you_start''', did_you_win, did_you_have_fun, how_many_opponents, '''date''')
 
         if data.empty:
             data = new_data
