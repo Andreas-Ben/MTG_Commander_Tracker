@@ -22,7 +22,7 @@ uploaded_file = st.file_uploader("Upload an Excel file", type=["xlsx", "xls"])
 
 
 
-@st.cache_data(persist='disk')
+@st.cache_data(persist=True)
 def load_data(file):
     data = pd.read_excel(file, usecols="A:G")
     lowercase = lambda x: str(x).lower()
@@ -30,7 +30,7 @@ def load_data(file):
     data['date'] = pd.to_datetime(data['date'], errors='coerce')
     return data
 
-@st.cache_data(persist='disk')
+@st.cache_data(persist=True)
 def manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_you_have_fun, how_many_opponents, date):
     new_data = pd.DataFrame({
         'commander': [commander],
