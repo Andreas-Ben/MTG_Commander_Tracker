@@ -114,5 +114,3 @@ with bottom():
             )
     with col1:
         st.write("Made with ❤️ by Benee")
-
-    button(username="fake-username")
