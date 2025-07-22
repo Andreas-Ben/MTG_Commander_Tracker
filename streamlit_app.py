@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 from streamlit_extras.bottom_container import bottom  # Importing the bottom container
-from io import BytesIO
 
 st.title('MTG Commander Tracker and Stats')
 
@@ -52,19 +51,18 @@ if uploaded_file:
 col1, col2 = st.columns(2)
 with col2:
     raw = st.checkbox('Show raw data')
-
 if raw:        
     st.subheader('Raw data')
     if not data.empty:
         st.write(data)
     else:
-        st.write("No data available.")    
+        st.write("No data available.") 
+
 with col1:
-    manual = st.checkbox('Manual Data Entry')
-    
+    manual = st.checkbox('Manual Data Entry')    
 if manual:
     st.write("You can enter data manually here:")
-    commander = st.text_input("Commander")
+    commander = st.multiselect("Commander", options=['Vivi', 'Sephiroth', 'Atla Panlani', 'Nine Fingers Keen', 'Slicer', 'Brion'], max_selections=1, accept_new_options=True)
 #    color_combo = st.text_input("Color Combo")
 #    did_you_start = st.checkbox("Did you Start?")
     did_you_win = st.checkbox("Did you Win?")
@@ -80,6 +78,7 @@ if manual:
             data = pd.concat([data, new_data], ignore_index=True)
         st.write("Data added successfully!")
         st.write(data)
+
 if data.empty:
     st.write("No data available. Please upload a file or enter data manually.")
 else:
