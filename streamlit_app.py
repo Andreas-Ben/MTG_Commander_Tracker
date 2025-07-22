@@ -88,15 +88,15 @@ else:
 
     st.subheader('Games played by each commander')
     commander_counts = data['commander'].value_counts()
-    st.bar_chart(commander_counts)
+    st.bar_chart(commander_counts, horizontal=True)
 
     st.subheader('Winrate by Commander')
     winrate_by_com = data.groupby('commander')['did you win?'].mean() * 100
-    st.bar_chart(winrate_by_com)
+    st.bar_chart(winrate_by_com, horizontal=True)
 
     st.subheader('Funrate by Commander')
     funrate_by_com = data.groupby('commander')['did you have fun?'].mean() * 100
-    st.bar_chart(funrate_by_com)
+    st.bar_chart(funrate_by_com, horizontal=True)
 
 with bottom():
     col1, col2 = st.columns(2)
