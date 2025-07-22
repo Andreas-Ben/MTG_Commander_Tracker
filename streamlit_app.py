@@ -49,15 +49,20 @@ data = pd.DataFrame()
 if uploaded_file:
     data = load_data(uploaded_file)
     st.write("Data loaded successfully!")
+col1, col2 = st.columns(2)
+with col2:
+    raw = st.checkbox('Show raw data')
 
-if st.checkbox('Show raw data'):
+if raw:        
     st.subheader('Raw data')
     if not data.empty:
         st.write(data)
     else:
-        st.write("No data available.")
-
-if st.checkbox('Manual Data Entry'):
+        st.write("No data available.")    
+with col1:
+    manual = st.checkbox('Manual Data Entry')
+    
+if manual:
     st.write("You can enter data manually here:")
     commander = st.text_input("Commander")
 #    color_combo = st.text_input("Color Combo")
@@ -69,22 +74,24 @@ if st.checkbox('Manual Data Entry'):
 
     if st.button('Submit'):
         new_data = manual_data_entry(commander, '''color_combo''', '''did_you_start''', did_you_win, did_you_have_fun, how_many_opponents, '''date''')
-
         if data.empty:
             data = new_data
         else:
             data = pd.concat([data, new_data], ignore_index=True)
         st.write("Data added successfully!")
         st.write(data)
-
 if data.empty:
     st.write("No data available. Please upload a file or enter data manually.")
 else:
     winrate = data['did you win?'].mean() * 100
     funrate = data['did you have fun?'].mean() * 100
     opponents = data['how many opponents'].mean()
-    st.write(f"Winrate: {winrate:.2f}% ({data['did you win?'].sum()} out of {len(data)})")
-    st.write(f"Funrate: {funrate:.2f}% ({data['did you have fun?'].sum()} out of {len(data)})")
+
+    statcol1, statcol2 = st.columns(2)
+    with statcol1:
+        st.write(f"Winrate: {winrate:.2f}% ({data['did you win?'].sum()} out of {len(data)})")
+    with statcol2:
+        st.write(f"Funrate: {funrate:.2f}% ({data['did you have fun?'].sum()} out of {len(data)})")
     st.write(f"Average number of opponents: {opponents:.2f}")
 
     st.subheader('Games played by each commander')
@@ -100,8 +107,8 @@ else:
     st.bar_chart(funrate_by_com, horizontal=True)
 
 with bottom():
-    col1, col2 = st.columns(2)
-    with col2:
+    botcol1, botcol2 = st.columns(2)
+    with botcol2:
         if not data.empty:
             #output = BytesIO()
             csv = data.to_csv(index=False)
@@ -112,7 +119,7 @@ with bottom():
                 mime='text/csv',
                 use_container_width=True
             )
-    with col1:
+    with botcol1:
         st.write("Made with ❤️ by Benee")
 
 
