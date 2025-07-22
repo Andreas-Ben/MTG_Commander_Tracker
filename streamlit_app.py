@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 from streamlit_extras.bottom_container import bottom  # Importing the bottom container
 from io import BytesIO
-
+from streamlit_extras.buy_me_a_coffee import button
 st.title('MTG Commander Tracker and Stats')
 
 # Example data
@@ -98,17 +98,21 @@ else:
     funrate_by_com = data.groupby('commander')['did you have fun?'].mean() * 100
     st.bar_chart(funrate_by_com)
 
-
-
 with bottom():
-    st.write("Made with ❤️ by Benee")
-    if not data.empty:
-        output = BytesIO()
-        with pd.ExcelWriter(output, engine='openpyxl') as writer:
-            data.to_excel(writer, index=False)
-        st.download_button(
-            label="Download Data as Excel",
-            data=output.getvalue(),
-            file_name='mtg_data.xlsx',
-            mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-        )
+    col1, col2 = st.columns(2)
+    with col2:
+        if not data.empty:
+            output = BytesIO()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                data.to_excel(writer, index=False)
+            st.download_button(
+                label="Download Data as Excel",
+                data=output.getvalue(),
+                file_name='mtg_data.xlsx',
+                mime='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                use_container_width=True
+            )
+    with col1:
+        st.write("Made with ❤️ by Benee")
+
+    button(username="fake-username")
