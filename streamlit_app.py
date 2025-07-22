@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from streamlit_extras.bottom_container import bottom 
+from streamlit_extras import bottom 
 from io import BytesIO
 
 st.title('MTG Commander Tracker and Stats')
