@@ -24,7 +24,7 @@ uploaded_file = st.file_uploader("Upload an CSV file", type=["csv"])
 
 @st.cache_data(persist=True)
 def load_data(file):
-    data = pd.read_csv(file, usecols="A:D")
+    data = pd.read_csv(file)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
   #  data['date'] = pd.to_datetime(data['date'], errors='coerce')
