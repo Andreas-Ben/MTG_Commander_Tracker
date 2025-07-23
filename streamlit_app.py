@@ -1,9 +1,12 @@
 import streamlit as st
 import pandas as pd
 from streamlit_extras.bottom_container import bottom  # Importing the bottom container
-
+from streamlit_extras.dataframe_explorer import dataframe_explorer
 st.title('MTG Commander Tracker and Stats')
+st.write("To keep your data between sessions you will need to download it as a CSV file and upload it again next time you use this app.")
+st.write("Once you have entered data you can download via the button that shows up at the bottom of the page.")
 
+st.set_page_config(page_title="MTG Commander Tracker", page_icon=":trophy:", layout="wide")
 # Example data
 if st.checkbox('Show example data'):
     example_data = pd.DataFrame({
@@ -54,7 +57,8 @@ with col2:
 if raw:        
     st.subheader('Raw data')
     if not data.empty:
-        st.write(data)
+        filtered_df = dataframe_explorer(data, case=False)
+        st.dataframe(filtered_df, use_container_width=True)
     else:
         st.write("No data available.") 
 
@@ -119,6 +123,13 @@ with bottom():
                 use_container_width=True
             )
     with botcol1:
-        st.write("Made with ❤️ by Benée")
+        st.link_button(
+            label="Made with ❤️ by Benée",
+            url="https://github.com/Andreas-Ben/MTG_Commander_Tracker",
+            use_container_width=True,
+            help="Click to visit the GitHub repository"
+        )
+
+
 
 
