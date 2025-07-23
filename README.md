@@ -1,8 +1,6 @@
-# 🎈 Blank app template
+A simple tracker for MTG commander games mostly for myself, to use it you can start entering manual data once your session is done you can download the data as a csv file to enter it again next time
 
-A simple Streamlit app template for you to modify!
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://blank-app-template.streamlit.app/)
 
 ### How to run it on your own machine
 
