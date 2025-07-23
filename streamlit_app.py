@@ -119,6 +119,6 @@ with bottom():
                 use_container_width=True
             )
     with botcol1:
-        st.write("Made with ❤️ by Benee")
+        st.write("Made with ❤️ by Benée")
 
 
