@@ -67,7 +67,7 @@ if manual:
             st.session_state.data = pd.concat([st.session_state.data, new_data], ignore_index=True)
 
         st.write("Data added successfully!")
-        st.write(st.session_state.data)
+        #st.write(st.session_state.data)
 
 with col3:
     exdata = st.checkbox('Show example data')
@@ -121,7 +121,7 @@ with bottom():
             )
     with botcol1:
         st.link_button(
-            label="Made with ❤️ by Benée",
+            label="Made with ❤️ by Andreas Benée, in 2025",
             url="https://github.com/Andreas-Ben/MTG_Commander_Tracker",
             use_container_width=True,
             help="Click to visit the GitHub repository"
