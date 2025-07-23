@@ -2,11 +2,13 @@ import streamlit as st
 import pandas as pd
 from streamlit_extras.bottom_container import bottom  # Importing the bottom container
 from streamlit_extras.dataframe_explorer import dataframe_explorer
+# Set the title and description of the app
+st.set_page_config(page_title="MTG Commander Tracker", page_icon=":trophy:", layout="wide")
 st.title('MTG Commander Tracker and Stats')
 st.write("To keep your data between sessions you will need to download it as a CSV file and upload it again next time you use this app.")
 st.write("Once you have entered data you can download via the button that shows up at the bottom of the page.")
 
-st.set_page_config(page_title="MTG Commander Tracker", page_icon=":trophy:", layout="wide")
+
 # Example data
 if st.checkbox('Show example data'):
     example_data = pd.DataFrame({
@@ -20,10 +22,11 @@ if st.checkbox('Show example data'):
     })
     st.write(example_data)
 
+
+# File uploader for CSV files
 uploaded_file = st.file_uploader("Upload an CSV file", type=["csv"])
 
-
-
+# Function to load data from a CSV file and add it to the cache
 @st.cache_data(persist=True)
 def load_data(file):
     data = pd.read_csv(file)
@@ -32,6 +35,7 @@ def load_data(file):
   #  data['date'] = pd.to_datetime(data['date'], errors='coerce')
     return data
 
+#Function to handle manual data entry being added to the cashe/dataframe
 @st.cache_data(persist=True)
 def manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_you_have_fun, how_many_opponents, date):
 
@@ -46,7 +50,9 @@ def manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_yo
     })
     return new_data
 
-data = pd.DataFrame()
+
+
+
 
 if uploaded_file:
     data = load_data(uploaded_file)
