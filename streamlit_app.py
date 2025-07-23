@@ -51,7 +51,7 @@ def manual_data_entry(commander, color_combo, did_you_start, did_you_win, did_yo
     return new_data
 
 
-
+data = pd.DataFrame()  # Initialize an empty DataFrame
 
 
 if uploaded_file:
