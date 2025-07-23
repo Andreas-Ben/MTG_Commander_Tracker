@@ -62,12 +62,12 @@ with col1:
     manual = st.checkbox('Manual Data Entry')    
 if manual:
     st.write("You can enter data manually here:")
-    commander = st.multiselect("Commander", options=['Vivi', 'Sephiroth', 'Atla Panlani', 'Nine Fingers Keen', 'Slicer', 'Brion'], max_selections=1, accept_new_options=True)
+    commander = st.selectbox("Commander", options=data, accept_new_options=True)
 #    color_combo = st.text_input("Color Combo")
 #    did_you_start = st.checkbox("Did you Start?")
     did_you_win = st.checkbox("Did you Win?")
     did_you_have_fun = st.checkbox("Did you have Fun?")
-    how_many_opponents = st.number_input("How many opponents", min_value=0, max_value=3, value=1)
+    how_many_opponents = st.slider("How many opponents", min_value=1, max_value=5, value=3)
 #    date = st.date_input("Date")
 
     if st.button('Submit'):
