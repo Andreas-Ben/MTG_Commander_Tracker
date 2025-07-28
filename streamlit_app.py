@@ -8,6 +8,7 @@ st.set_page_config(page_title="MTG Commander Tracker", page_icon=":trophy:", lay
 st.title('MTG Commander Tracker and Stats')
 st.write("To keep your data between sessions you will need to download it as a CSV file and upload it again next time you use this app.")
 st.write("Once you have entered data you can download via the button that shows up at the bottom of the page.")
+st.write("To clear the cashe, reload the page")
 
 # Initialize session state for data
 if 'data' not in st.session_state:
@@ -68,6 +69,7 @@ if manual:
 
         st.write("Data added successfully!")
         #st.write(st.session_state.data)
+        st.rerun()
 
 with col3:
     exdata = st.checkbox('Show example data')
